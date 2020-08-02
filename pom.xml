@@ -55,6 +55,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- JSP parser -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- End JSP parser -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework.security</groupId> -->
 		<!-- <artifactId>spring-security-test</artifactId> -->

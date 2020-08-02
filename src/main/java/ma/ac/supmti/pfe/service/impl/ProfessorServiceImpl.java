@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.ProfessorService;
 
+import java.util.Optional;
+
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
 
@@ -20,5 +22,21 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public void delete(ProfessorModel professorModel) {
         professorDao.delete(professorModel);
+    }
+
+    @Override
+    public void delete(Long professorId) {
+        professorDao.deleteById(professorId);
+    }
+
+    @Override
+    public ProfessorModel getProfessor(Long professorId) {
+//        Optional<ProfessorModel> professorModel = professorDao.findById(professorId);
+//        if(professorModel.isPresent()) {
+//            return professorModel.get();
+//        }
+//        System.out.println("Professor id " + professorId + " not found in DB!");
+//        return null;
+        return professorDao.getOne(professorId);
     }
 }

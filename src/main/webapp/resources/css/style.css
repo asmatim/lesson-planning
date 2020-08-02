@@ -1,0 +1,17 @@
+.main {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+.search-group label {
+	width: 60px;
+}
+
+.photo {
+	width: 300px;
+}
+
+.footer {
+	background-color: #343a40;
+	line-height: 60px;
+}

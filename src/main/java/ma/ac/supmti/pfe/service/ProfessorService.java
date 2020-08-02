@@ -6,4 +6,6 @@ public interface ProfessorService {
 
     ProfessorModel save(ProfessorModel professorModel);
     void delete(ProfessorModel professorModel);
+    void delete(Long professorId);
+    ProfessorModel getProfessor(Long professorId);
 }
