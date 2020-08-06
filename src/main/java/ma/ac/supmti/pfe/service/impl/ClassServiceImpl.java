@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.ClassService;
 
+import java.util.List;
+
 @Service
 public class ClassServiceImpl implements ClassService {
 
@@ -20,5 +22,18 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public void delete(ClassModel classModel) {
         classDao.delete(classModel);
+    }
+
+    @Override
+    public void delete(Long classId) { classDao.deleteById(classId); }
+
+    @Override
+    public ClassModel getOneClass(Long classId) {
+        return classDao.getOne(classId);
+    }
+
+    @Override
+    public List<ClassModel> findAllClasses() {
+        return classDao.findAll();
     }
 }

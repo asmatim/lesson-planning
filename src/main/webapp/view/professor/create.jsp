@@ -7,9 +7,9 @@
 <div class="main">
 	<div class="container">
 		<div class="card">
-			<h5 class="card-header">Informations voiture</h5>
+			<h5 class="card-header">Informations professeur</h5>
 			<div class="card-body">
-				<h5 class="card-title">Informations voiture</h5>
+				<h5 class="card-title">Créer un professeur</h5>
 				<form:form action="${createUrl}" method="POST" modelAttribute="professor">
 
 					<div class="form-group">

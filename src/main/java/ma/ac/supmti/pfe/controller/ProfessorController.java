@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/professor")
 public class ProfessorController {
@@ -43,6 +45,15 @@ public class ProfessorController {
     public String removeProfessor(@PathVariable("professorId") Long professorId){
         professorFacade.delete(professorId);
         return "redirect:/professor/create";
+    }
+
+    @RequestMapping("/list")
+    public String showProfessorList(Model model){
+        String title = "Liste des professeurs";
+        List<ProfessorModel> professors = professorFacade.findAllProfessors();
+        model.addAttribute("title", title);
+        model.addAttribute("professors", professors);
+        return "/professor/list";
     }
 
 }

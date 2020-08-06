@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.ModuleService;
 
+import java.util.List;
+
 @Service
 public class ModuleServiceImpl implements ModuleService {
 
@@ -18,7 +20,17 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public void delete(ModuleModel moduleModel) {
-        moduleDao.delete(moduleModel);
+    public void delete(Long moduleId) {
+        moduleDao.deleteById(moduleId);
+    }
+
+    @Override
+    public List<ModuleModel> findAllModules() {
+        return moduleDao.findAll();
+    }
+
+    @Override
+    public ModuleModel getOne(Long moduleId) {
+        return moduleDao.getOne(moduleId);
     }
 }

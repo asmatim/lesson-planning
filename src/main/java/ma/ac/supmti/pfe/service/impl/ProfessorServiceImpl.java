@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.ProfessorService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 //        System.out.println("Professor id " + professorId + " not found in DB!");
 //        return null;
         return professorDao.getOne(professorId);
+    }
+
+    @Override
+    public List<ProfessorModel> findAllProfessors() {
+        return professorDao.findAll();
     }
 }

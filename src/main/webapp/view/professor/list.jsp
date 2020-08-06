@@ -1,31 +1,31 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../company-header.jsp"></jsp:include>
-<spring:url value="/company/car/create" var="createCarUrl" />
-<spring:url value="/company/car/detail" var="detailCarUrl" />
-<spring:url value="/resources/upload/" var="uploadUrl" />
+<jsp:include page="../header.jsp"></jsp:include>
+<spring:url value="/professor/create" var="createUrl" />
+<spring:url value="/professor/detail" var="detailUrl" />
 
 <div class="main">
 	<div class="container">
-			<c:forEach items="${cars}" var="car">
+			<c:forEach items="${professors}" var="professor">
 				<div class="card mb-3">
-					<h3 class="card-header">${car.brand} - ${car.model}</h3>
+					<h3 class="card-header">${professor.firstName} - ${professor.lastName}</h3>
 						<div class="card-body">
-							<h5 class="card-title">${car.brand}- ${car.model}</h5>
+							<h5 class="card-title">${professor.firstName} - ${professor.lastName}</h5>
 							<div class="card-text">
-								<p><span class="font-weight-bold">Matricule: </span>${car.matricule}</p>
-								<p><span class="font-weight-bold">Marque: </span>${car.brand}</p>
-								<p><span class="font-weight-bold">Mod�le: </span>${car.model}</p>
-								<p><span class="font-weight-bold">Ann�e: </span>${car.brand}</p>
-								<p><img class="photo" alt="" src="${uploadUrl}${car.image}"></p>
+								<p><span class="font-weight-bold">Nom: </span>${professor.lastName}</p>
+								<p><span class="font-weight-bold">Prénom: </span>${professor.firstName}</p>
+								<p><span class="font-weight-bold">Cin: </span>${professor.cin}</p>
+								<p><span class="font-weight-bold">Email: </span>${professor.email}</p>
+								<p><span class="font-weight-bold">Date de naissance: </span>${professor.birthdate}</p>
+								<p><span class="font-weight-bold">numéro de téléphone: </span>${professor.phone}</p>
 							</div>
-					</div>
+					    </div>
 					<div class="card-footer">
-						<div class="text-right"><a href="${detailCarUrl}/${car.id}" class="btn btn-primary">Afficher</a></div>
+						<div class="text-right"><a href="${detailUrl}/${professor.id}" class="btn btn-primary">Afficher</a></div>
 					</div>
 				</div>
 			</c:forEach>
 	</div>
 </div>
-<jsp:include page="../company-footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>

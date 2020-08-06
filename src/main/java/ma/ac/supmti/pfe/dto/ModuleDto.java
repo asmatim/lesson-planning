@@ -1,16 +1,16 @@
 package ma.ac.supmti.pfe.dto;
 
-public class BranchDto {
+public class ModuleDto {
 
-    private Long branchId;
+    private Long moduleId;
     private String name;
 
-    public Long getBranchId() {
-        return branchId;
+    public Long getModuleId() {
+        return moduleId;
     }
 
-    public void setBranchId(Long branchId) {
-        this.branchId = branchId;
+    public void setModuleId(Long moduleId) {
+        this.moduleId = moduleId;
     }
 
     public String getName() {
@@ -20,5 +20,4 @@ public class BranchDto {
     public void setName(String name) {
         this.name = name;
     }
-
 }

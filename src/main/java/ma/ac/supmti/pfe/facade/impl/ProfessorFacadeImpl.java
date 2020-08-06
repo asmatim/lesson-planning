@@ -7,6 +7,8 @@ import ma.ac.supmti.pfe.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProfessorFacadeImpl implements ProfessorFacade {
 
@@ -29,6 +31,11 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
         return professorService.getProfessor(professorId);
     }
 
+    @Override
+    public List<ProfessorModel> findAllProfessors() {
+        return professorService.findAllProfessors();
+    }
+
     private ProfessorModel convertProfessor(ProfessorDto professorDto) {
         final ProfessorModel professorModel = new ProfessorModel();
         professorModel.setFirstName(professorDto.getFirstName());
@@ -39,4 +46,5 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
         professorModel.setPhone(professorDto.getPhone());
         return professorModel;
     }
+
 }

@@ -2,18 +2,13 @@
 <spring:url value="/resources/css/style.css" var="cssResource" />
 <spring:url value="/resources" var="urlResource" />
 
-<spring:url value="/company/reservation/history" var="homeUrl" />
+<spring:url value="/professor/list" var="homeUrl" />
 
-<spring:url value="/company/reservation/history"
-	var="reservationHistoryUrl" />
-<spring:url value="/company/reservation/list/validate"
-	var="reservationValidateUrl" />
+<spring:url value="/professor/list"	var="profListUrl" />
+<spring:url value="/professor/create" var="profCreateUrl" />
 
-<spring:url value="/company/offer/create" var="offerCreateUrl" />
-<spring:url value="/company/offer/list" var="offerListUrl" />
-
-<spring:url value="/company/car/create" var="carCreateUrl" />
-<spring:url value="/company/car/list" var="carListUrl" />
+<spring:url value="/branch/list"	var="branchListUrl" />
+<spring:url value="/branch/create" var="branchCreateUrl" />
 
 <spring:url value="/logout" var="logoutUrl" />
 
@@ -34,7 +29,7 @@
 	<header>
 		<!-- Fixed navbar -->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand" href="#"><span class="oi oi-wrench" title="Voiture" aria-hidden="true"></span> Espace agence location</a>
+			<a class="navbar-brand" href="#"><span class="oi oi-wrench" title="Suivi Cours" aria-hidden="true"></span> Planification de cours</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarCollapse" aria-controls="navbarCollapse"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -48,18 +43,18 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownCar"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><span class="oi oi-puzzle-piece" title="Voiture" aria-hidden="true"></span> Voiture</a>
+						aria-expanded="false"><span class="oi oi-puzzle-piece" title="Professeur" aria-hidden="true"></span> Professeur</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownCar">
-							<a class="dropdown-item" href="${carCreateUrl}"><span class="oi oi-plus" title="Ajouter Voiture" aria-hidden="true"></span> Ajouter</a> <a
-								class="dropdown-item" href="${carListUrl}"><span class="oi oi-list" title="Voitures" aria-hidden="true"></span> Liste</a>
+							<a class="dropdown-item" href="${profCreateUrl}"><span class="oi oi-plus" title="Ajouter Professeur" aria-hidden="true"></span> Ajouter</a> <a
+								class="dropdown-item" href="${profListUrl}"><span class="oi oi-list" title="Professeurs" aria-hidden="true"></span> Liste</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownOffer"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><span class="oi oi-flag" title="Offre" aria-hidden="true"></span> Offre</a>
+						aria-expanded="false"><span class="oi oi-flag" title="Offre" aria-hidden="true"></span> Branche</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownOffer">
-							<a class="dropdown-item" href="${offerCreateUrl}"><span class="oi oi-plus" title="Ajouter" aria-hidden="true"></span> Ajouter</a> <a
-								class="dropdown-item" href="${offerListUrl}"><span class="oi oi-list" title="Liste Offres" aria-hidden="true"></span> Liste</a>
+							<a class="dropdown-item" href="${branchCreateUrl}"><span class="oi oi-plus" title="Ajouter Branche" aria-hidden="true"></span> Ajouter</a> <a
+								class="dropdown-item" href="${branchListUrl}"><span class="oi oi-list" title="Liste Branches" aria-hidden="true"></span> Liste</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownReservation"
