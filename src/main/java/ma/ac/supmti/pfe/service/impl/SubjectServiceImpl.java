@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.SubjectService;
 
+import java.util.List;
+
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
@@ -20,5 +22,20 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void delete(SubjectModel subjectModel) {
         subjectDao.delete(subjectModel);
+    }
+
+    @Override
+    public void delete(Long subjectId) {
+        subjectDao.deleteById(subjectId);
+    }
+
+    @Override
+    public SubjectModel getSubject(Long subjectId) {
+        return subjectDao.getOne(subjectId);
+    }
+
+    @Override
+    public List<SubjectModel> findAllSubjects() {
+        return subjectDao.findAll();
     }
 }

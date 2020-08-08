@@ -11,7 +11,7 @@
 				<div class="card mb-3">
 					<h3 class="card-header">${module.name}</h3>
 						<div class="card-body">
-							<h5 class="card-title">${module.year}</h5>
+							<h5 class="card-title">${module.name}</h5>
 							<div class="card-text">
 								<p><span class="font-weight-bold">Nom: </span>${module.name}</p>
 							</div>
