@@ -17,6 +17,12 @@
 						<label for="cYear">Année</label>
 						    <form:input id="cYear" class="form-control"	path="year" />
 					</div>
+					<div class="form-group">
+                        <label for="cBranch">Branche</label>
+                        <form:select path="branchId" id="cBranch" class="form-control">
+                               <form:options items="${branches}" itemLabel="name" itemValue="id" />
+                        </form:select>
+                    </div>
 					<input type="submit" class="btn btn-primary" value="Valider" />
 				</form:form>
 			</div>

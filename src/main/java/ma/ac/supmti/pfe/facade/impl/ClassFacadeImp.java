@@ -2,7 +2,9 @@ package ma.ac.supmti.pfe.facade.impl;
 
 import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.facade.ClassFacade;
+import ma.ac.supmti.pfe.model.BranchModel;
 import ma.ac.supmti.pfe.model.ClassModel;
+import ma.ac.supmti.pfe.service.BranchService;
 import ma.ac.supmti.pfe.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +15,10 @@ import java.util.List;
 public class ClassFacadeImp implements ClassFacade {
 
     @Autowired
-    ClassService classService;
+    private ClassService classService;
+
+    @Autowired
+    private BranchService branchService;
 
     @Override
     public ClassModel save(ClassDto classDto) {
@@ -36,9 +41,10 @@ public class ClassFacadeImp implements ClassFacade {
 
     private ClassModel convertClass(ClassDto classDto){
         final ClassModel classModel = new ClassModel();
-        classModel.setId(classDto.getClassId());
+        final BranchModel branchModel = branchService.getBranch(classDto.getBranchId());
         classModel.setName(classDto.getName());
         classModel.setYear(classDto.getYear());
+        classModel.setBranch(branchModel);
         return classModel;
     }
 }

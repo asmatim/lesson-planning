@@ -17,6 +17,12 @@
 						<label for="sVolume">Volume</label>
 						    <form:input id="sVolume" class="form-control"	path="volume" />
 					</div>
+					<div class="form-group">
+                        <label for="sModule">Module</label>
+                        <form:select path="moduleId" id="sModule" class="form-control">
+                               <form:options items="${modules}" itemLabel="name" itemValue="id" />
+                        </form:select>
+                    </div>
 					<input type="submit" class="btn btn-primary" value="Valider" />
 				</form:form>
 			</div>

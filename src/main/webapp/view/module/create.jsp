@@ -15,6 +15,12 @@
 						<label for="mName">Nom</label>
 						<form:input id="mName" class="form-control"	path="name" />
 					</div>
+					<div class="form-group">
+                        <label for="mBranch">Branche</label>
+                        <form:select path="branchId" id="mBranch" class="form-control">
+                               <form:options items="${branches}" itemLabel="name" itemValue="id" />
+                        </form:select>
+                    </div>
 					<input type="submit" class="btn btn-primary" value="Valider" />
 				</form:form>
 			</div>

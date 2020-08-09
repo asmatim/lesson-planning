@@ -4,6 +4,7 @@ public class ModuleDto {
 
     private Long moduleId;
     private String name;
+    private Long branchId;
 
     public Long getModuleId() {
         return moduleId;
@@ -20,4 +21,14 @@ public class ModuleDto {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
+    }
+
 }

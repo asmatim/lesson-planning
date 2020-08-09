@@ -14,6 +14,7 @@
 				<div class="card-text">
 					<p><span class="font-weight-bold">Nom: </span>${subject.name}</p>
 					<p><span class="font-weight-bold">Volume: </span>${subject.volume}</p>
+					<p><span class="font-weight-bold">Module: </span>${subject.module.name}</p>
 				</div>
 				<div class="card-footer">
 					<div class="text-right">

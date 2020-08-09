@@ -2,8 +2,10 @@ package ma.ac.supmti.pfe.controller;
 
 import ma.ac.supmti.pfe.dto.ClassroomDto;
 import ma.ac.supmti.pfe.dto.SubjectDto;
+import ma.ac.supmti.pfe.facade.ModuleFacade;
 import ma.ac.supmti.pfe.facade.SubjectFacade;
 import ma.ac.supmti.pfe.model.ClassroomModel;
+import ma.ac.supmti.pfe.model.ModuleModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,19 @@ import java.util.List;
 public class SubjectController {
 
     @Autowired
-    SubjectFacade subjectFacade;
+    private SubjectFacade subjectFacade;
+
+    @Autowired
+    private ModuleFacade moduleFacade;
 
     @RequestMapping("/create")
     public String showSubjectForm(Model model){
         String title = "Nouvelle matière";
         SubjectDto subject = new SubjectDto();
+        final List<ModuleModel> modules = moduleFacade.findAllModules();
         model.addAttribute("subject", subject);
         model.addAttribute("title", title);
+        model.addAttribute("modules", modules);
         return "/subject/create";
     }
 

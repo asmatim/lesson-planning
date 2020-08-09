@@ -13,6 +13,7 @@
 				<h5 class="card-title">${module.name} </h5>
 				<div class="card-text">
 					<p><span class="font-weight-bold">Nom: </span>${module.name}</p>
+					<p><span class="font-weight-bold">Branche: </span>${module.branch.name}</p>
 				</div>
 				<div class="card-footer">
 					<div class="text-right">

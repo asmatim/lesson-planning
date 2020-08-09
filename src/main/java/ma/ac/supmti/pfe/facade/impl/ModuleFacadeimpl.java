@@ -2,7 +2,9 @@ package ma.ac.supmti.pfe.facade.impl;
 
 import ma.ac.supmti.pfe.dto.ModuleDto;
 import ma.ac.supmti.pfe.facade.ModuleFacade;
+import ma.ac.supmti.pfe.model.BranchModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
+import ma.ac.supmti.pfe.service.BranchService;
 import ma.ac.supmti.pfe.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,8 +15,10 @@ import java.util.List;
 public class ModuleFacadeimpl implements ModuleFacade {
 
     @Autowired
-    ModuleService moduleService;
+    private ModuleService moduleService;
 
+    @Autowired
+    private BranchService branchService;
 
     @Override
     public ModuleModel save(ModuleDto moduleDto) {
@@ -44,7 +48,9 @@ public class ModuleFacadeimpl implements ModuleFacade {
 
     private ModuleModel convertModule(ModuleDto moduleDto){
         final ModuleModel moduleModel = new ModuleModel();
+        final BranchModel branchModel = branchService.getBranch(moduleDto.getBranchId());
         moduleModel.setName(moduleDto.getName());
+        moduleModel.setBranch(branchModel);
         return moduleModel;
     }
 }

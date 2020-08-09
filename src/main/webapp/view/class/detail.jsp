@@ -13,7 +13,8 @@
 				<h5 class="card-title">${classe.name} </h5>
 				<div class="card-text">
 					<p><span class="font-weight-bold">Nom: </span>${classe.name}</p>
-					<p><span class="font-weight-bold">Nom: </span>${classe.year}</p>
+					<p><span class="font-weight-bold">Année: </span>${classe.year}</p>
+					<p><span class="font-weight-bold">Branche: </span>${classe.branch.name}</p>
 				</div>
 				<div class="card-footer">
 					<div class="text-right">

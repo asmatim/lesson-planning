@@ -1,7 +1,9 @@
 package ma.ac.supmti.pfe.controller;
 
 import ma.ac.supmti.pfe.dto.ModuleDto;
+import ma.ac.supmti.pfe.facade.BranchFacade;
 import ma.ac.supmti.pfe.facade.ModuleFacade;
+import ma.ac.supmti.pfe.model.BranchModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +22,17 @@ public class ModuleController {
     @Autowired
     private ModuleFacade moduleFacade;
 
+    @Autowired
+    private BranchFacade branchFacade;
+
     @RequestMapping("/create")
     public String showModuleForm(Model model){
         String title = "Nouveau Module";
         ModuleDto module = new ModuleDto();
+        List<BranchModel> branches = branchFacade.findAllBranches();
         model.addAttribute("module", module);
         model.addAttribute("title", title);
+        model.addAttribute("branches", branches);
         return "/module/create";
     }
 
