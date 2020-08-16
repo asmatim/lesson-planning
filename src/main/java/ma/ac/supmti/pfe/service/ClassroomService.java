@@ -1,6 +1,5 @@
 package ma.ac.supmti.pfe.service;
 
-import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ClassroomModel;
 
 import java.util.List;
