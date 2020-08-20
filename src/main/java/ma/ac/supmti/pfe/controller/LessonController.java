@@ -30,7 +30,7 @@ public class LessonController {
 
     @InitBinder
     public void bindingPreparation(WebDataBinder binder) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         CustomDateEditor orderDateEditor = new CustomDateEditor(dateFormat, true);
         binder.registerCustomEditor(Date.class, orderDateEditor);
     }

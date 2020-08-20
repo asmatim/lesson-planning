@@ -35,6 +35,10 @@ public class LessonServiceImpl implements LessonService {
     private void validateLesson(LessonModel lessonModel) {
         final List<String> errors = new ArrayList<>();
 
+        if(Boolean.FALSE.equals(checkDatesOrder(lessonModel))) {
+            errors.add("La date/heure de début de la séance doit être antérieure à la date de fin.");
+        }
+
         if (Boolean.FALSE.equals(checkClassroomIsFree(lessonModel))) {
             errors.add("La salle est occuppée durant ce créneau.");
         }
@@ -50,6 +54,12 @@ public class LessonServiceImpl implements LessonService {
         if (!CollectionUtils.isEmpty(errors)) {
             throw new InvalidLessonModelException(errors);
         }
+    }
+
+    private Boolean checkDatesOrder(LessonModel lessonModel) {
+        final Date lessonStartsAt = lessonModel.getStartDate();
+        final Date lessonEndsAt = lessonModel.getEndDate();
+        return lessonStartsAt.before(lessonEndsAt);
     }
 
     private Boolean checkClassroomIsFree(LessonModel lessonModel) {
