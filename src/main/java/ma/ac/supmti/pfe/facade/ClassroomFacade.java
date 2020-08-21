@@ -12,4 +12,6 @@ public interface ClassroomFacade {
     void delete(Long classroomId);
     List<ClassroomModel> findAllClasses();
     ClassroomModel getClassroom(Long classroomId);
+
+    List<ClassroomDto> getAllClassroomsDtos();
 }

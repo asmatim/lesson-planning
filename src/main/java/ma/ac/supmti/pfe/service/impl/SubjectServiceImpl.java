@@ -1,6 +1,7 @@
 package ma.ac.supmti.pfe.service.impl;
 
 import ma.ac.supmti.pfe.dao.SubjectDao;
+import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,10 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<SubjectModel> findAllSubjects() {
         return subjectDao.findAll();
+    }
+
+    @Override
+    public List<SubjectModel> findSubjectsByClass(ClassModel classModel) {
+        return subjectDao.findByClass(classModel);
     }
 }

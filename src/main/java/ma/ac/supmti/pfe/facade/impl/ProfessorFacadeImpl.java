@@ -1,5 +1,6 @@
 package ma.ac.supmti.pfe.facade.impl;
 
+import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.dto.ProfessorDto;
 import ma.ac.supmti.pfe.facade.ProfessorFacade;
 import ma.ac.supmti.pfe.model.ProfessorModel;
@@ -7,6 +8,7 @@ import ma.ac.supmti.pfe.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,8 +34,30 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
     }
 
     @Override
-    public List<ProfessorModel> findAllProfessors() {
+    public List<ProfessorModel> getAllProfessors() {
         return professorService.findAllProfessors();
+    }
+
+    @Override
+    public List<ProfessorDto> getAllProfessorsDtos() {
+        List<ProfessorModel> professors = professorService.findAllProfessors();
+        return reverseConvertAll(professors);
+    }
+
+    private List<ProfessorDto> reverseConvertAll(List<ProfessorModel> professors) {
+        List<ProfessorDto> professorDtos = new ArrayList<>();
+        for (ProfessorModel professorModel : professors) {
+            professorDtos.add(reverseConvert(professorModel));
+        }
+        return professorDtos;
+    }
+
+    private ProfessorDto reverseConvert(ProfessorModel professorModel) {
+        ProfessorDto professorDto = new ProfessorDto();
+        professorDto.setProfessorId(professorModel.getId());
+        professorDto.setFirstName(professorModel.getFirstName());
+        professorDto.setLastName(professorModel.getLastName());
+        return professorDto;
     }
 
     private ProfessorModel convertProfessor(ProfessorDto professorDto) {

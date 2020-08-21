@@ -13,5 +13,7 @@ public interface ProfessorFacade {
 
     ProfessorModel getProfessor(Long professorId);
 
-    List<ProfessorModel> findAllProfessors();
+    List<ProfessorModel> getAllProfessors();
+
+    List<ProfessorDto> getAllProfessorsDtos();
 }

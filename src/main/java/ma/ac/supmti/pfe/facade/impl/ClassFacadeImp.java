@@ -9,6 +9,7 @@ import ma.ac.supmti.pfe.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -35,8 +36,29 @@ public class ClassFacadeImp implements ClassFacade {
     }
 
     @Override
-    public List<ClassModel> saveAllClasses() {
+    public List<ClassModel> getAllClasses() {
         return classService.findAllClasses();
+    }
+
+    @Override
+    public List<ClassDto> getAllClassesDtos() {
+        List<ClassModel> classes = classService.findAllClasses();
+        return reverseConvertAll(classes);
+    }
+
+    private List<ClassDto> reverseConvertAll(List<ClassModel> classes) {
+        List<ClassDto> classDtos = new ArrayList<>();
+        for (ClassModel classModel : classes) {
+            classDtos.add(reverseConvert(classModel));
+        }
+        return classDtos;
+    }
+
+    private ClassDto reverseConvert(ClassModel classModel) {
+        ClassDto classDto = new ClassDto();
+        classDto.setClassId(classModel.getId());
+        classDto.setName(classModel.getName());
+        return classDto;
     }
 
     private ClassModel convertClass(ClassDto classDto){

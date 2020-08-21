@@ -1,5 +1,6 @@
 package ma.ac.supmti.pfe.controller;
 
+import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.dto.ClassroomDto;
 import ma.ac.supmti.pfe.dto.ModuleDto;
 import ma.ac.supmti.pfe.facade.ClassroomFacade;
@@ -8,10 +9,7 @@ import ma.ac.supmti.pfe.model.ModuleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Controller
@@ -58,5 +56,11 @@ public class ClassroomController {
         model.addAttribute("title", title);
         model.addAttribute("classrooms", classrooms);
         return "/classroom/list";
+    }
+
+    @RequestMapping("/get/all")
+    @ResponseBody
+    public List<ClassroomDto> getAllClassrooms(){
+        return classroomFacade.getAllClassroomsDtos();
     }
 }

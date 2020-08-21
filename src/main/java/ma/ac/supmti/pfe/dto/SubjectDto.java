@@ -4,9 +4,18 @@ import javax.persistence.Column;
 
 public class SubjectDto {
 
+    private Long subjectId;
     private String name;
     private Integer volume;
     private Long moduleId;
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
 
     public String getName() {
         return name;

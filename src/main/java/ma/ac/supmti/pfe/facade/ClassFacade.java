@@ -11,6 +11,8 @@ public interface ClassFacade {
 
     ClassModel getOneClass(Long classId);
 
-    List<ClassModel> saveAllClasses();
+    List<ClassModel> getAllClasses();
+
+    List<ClassDto> getAllClassesDtos();
 }
 

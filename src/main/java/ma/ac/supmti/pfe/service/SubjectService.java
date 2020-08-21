@@ -1,5 +1,6 @@
 package ma.ac.supmti.pfe.service;
 
+import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ProfessorModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 
@@ -13,4 +14,5 @@ public interface SubjectService {
     SubjectModel getSubject(Long subjectId);
     List<SubjectModel> findAllSubjects();
 
+    List<SubjectModel> findSubjectsByClass(ClassModel classModel);
 }

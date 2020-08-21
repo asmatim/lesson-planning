@@ -2,13 +2,16 @@ package ma.ac.supmti.pfe.facade.impl;
 
 import ma.ac.supmti.pfe.dto.SubjectDto;
 import ma.ac.supmti.pfe.facade.SubjectFacade;
+import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
+import ma.ac.supmti.pfe.service.ClassService;
 import ma.ac.supmti.pfe.service.ModuleService;
 import ma.ac.supmti.pfe.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,6 +23,9 @@ public class SubjectFacadeImpl  implements SubjectFacade {
 
     @Autowired
     private ModuleService moduleService;
+
+    @Autowired
+    private ClassService classService;
 
     @Override
     public SubjectModel save(SubjectDto subjectDto) {
@@ -42,9 +48,30 @@ public class SubjectFacadeImpl  implements SubjectFacade {
         return subjectService.getSubject(subjectId);
     }
 
-    @Override
-    public List<SubjectModel> findAllSubjects() {
+    public List<SubjectModel> getAllSubjects() {
         return subjectService.findAllSubjects();
+    }
+
+    @Override
+    public List<SubjectDto> getAllSubjectsDtos(Long classId) {
+        ClassModel classModel = classService.getOneClass(classId);
+        List<SubjectModel> subjects = subjectService.findSubjectsByClass(classModel);
+        return reverseConvertAll(subjects);
+    }
+
+    private List<SubjectDto> reverseConvertAll(List<SubjectModel> subjects) {
+        List<SubjectDto> subjectDtos = new ArrayList<>();
+        for (SubjectModel subjectModel : subjects) {
+            subjectDtos.add(reverseConvert(subjectModel));
+        }
+        return subjectDtos;
+    }
+
+    private SubjectDto reverseConvert(SubjectModel subjectModel) {
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setSubjectId(subjectModel.getId());
+        subjectDto.setName(subjectModel.getName());
+        return subjectDto;
     }
 
     private SubjectModel convertSubject(SubjectDto subjectDto){

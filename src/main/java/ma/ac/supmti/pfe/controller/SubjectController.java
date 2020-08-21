@@ -1,5 +1,6 @@
 package ma.ac.supmti.pfe.controller;
 
+import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.dto.ClassroomDto;
 import ma.ac.supmti.pfe.dto.SubjectDto;
 import ma.ac.supmti.pfe.facade.ModuleFacade;
@@ -8,12 +9,10 @@ import ma.ac.supmti.pfe.model.ClassroomModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -62,10 +61,16 @@ public class SubjectController {
     @RequestMapping("/list")
     public String showSubjectList(Model model){
         String title = "Liste de matières";
-        List<SubjectModel> subjects = subjectFacade.findAllSubjects();
+        List<SubjectModel> subjects = subjectFacade.getAllSubjects();
         model.addAttribute("title", title);
         model.addAttribute("subjects", subjects);
         return "/subject/list";
+    }
+
+    @RequestMapping("/get/all")
+    @ResponseBody
+    public List<SubjectDto> getAllSubjects(@Param("classId") Long classId){
+        return subjectFacade.getAllSubjectsDtos(classId);
     }
 
 

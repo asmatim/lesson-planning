@@ -1,5 +1,6 @@
 package ma.ac.supmti.pfe.controller;
 
+import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.dto.ProfessorDto;
 import ma.ac.supmti.pfe.facade.ProfessorFacade;
 import ma.ac.supmti.pfe.model.ProfessorModel;
@@ -50,10 +51,16 @@ public class ProfessorController {
     @RequestMapping("/list")
     public String showProfessorList(Model model){
         String title = "Liste des professeurs";
-        List<ProfessorModel> professors = professorFacade.findAllProfessors();
+        List<ProfessorModel> professors = professorFacade.getAllProfessors();
         model.addAttribute("title", title);
         model.addAttribute("professors", professors);
         return "/professor/list";
+    }
+
+    @RequestMapping("/get/all")
+    @ResponseBody
+    public List<ProfessorDto> getAllProfessors(){
+        return professorFacade.getAllProfessorsDtos();
     }
 
 }

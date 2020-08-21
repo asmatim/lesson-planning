@@ -4,9 +4,11 @@ import ma.ac.supmti.pfe.dto.ClassroomDto;
 import ma.ac.supmti.pfe.facade.ClassroomFacade;
 import ma.ac.supmti.pfe.model.ClassroomModel;
 import ma.ac.supmti.pfe.service.ClassroomService;
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -39,6 +41,27 @@ public class ClassroomFacadeImp implements ClassroomFacade {
     @Override
     public ClassroomModel getClassroom(Long classroomId) {
         return classroomService.getClassroom(classroomId);
+    }
+
+    @Override
+    public List<ClassroomDto> getAllClassroomsDtos() {
+        List<ClassroomModel> classrooms = classroomService.findAllClasses();
+        return reverseConvertAll(classrooms);
+    }
+
+    private List<ClassroomDto> reverseConvertAll(List<ClassroomModel> classrooms) {
+        List<ClassroomDto> classroomDtos = new ArrayList<>();
+        for (ClassroomModel classroomModel:classrooms ) {
+            classroomDtos.add(reverseConvert(classroomModel));
+        }
+        return classroomDtos;
+    }
+
+    private ClassroomDto reverseConvert(ClassroomModel classroomModel) {
+        ClassroomDto classroomDto = new ClassroomDto();
+        classroomDto.setClassroomId(classroomModel.getId());
+        classroomDto.setName(classroomModel.getName());
+        return classroomDto;
     }
 
     private ClassroomModel convertClassroom(ClassroomDto classroomDto){

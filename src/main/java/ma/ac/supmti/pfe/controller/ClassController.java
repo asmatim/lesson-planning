@@ -8,10 +8,7 @@ import ma.ac.supmti.pfe.model.ClassModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -60,9 +57,15 @@ public class ClassController {
     @RequestMapping("/list")
     public String showClassList(Model model){
         String title = "List des classes";
-        List<ClassModel> classes = classFacade.saveAllClasses();
+        List<ClassModel> classes = classFacade.getAllClasses();
         model.addAttribute("title", title);
         model.addAttribute("classes", classes);
         return "/class/list";
+    }
+
+    @RequestMapping("/get/all")
+    @ResponseBody
+    public List<ClassDto> getAllClasses() {
+        return classFacade.getAllClassesDtos();
     }
 }
