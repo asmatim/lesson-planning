@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url value="/resources/css/style.css" var="cssResource" />
+<spring:url value="/resources/css/planing.css" var="planingCssResource" />
 <spring:url value="/resources" var="urlResource" />
 
 <spring:url value="/professor/list" var="homeUrl" />
@@ -24,6 +25,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="${urlResource}/open-iconic/font/css/open-iconic-bootstrap.css">
 <link rel="stylesheet" href="${cssResource}">
+<link rel="stylesheet" href="${planingCssResource}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css">
 </head>
 <body>
 	<header>

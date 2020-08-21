@@ -1,15 +1,12 @@
 package ma.ac.supmti.pfe.controller;
 
-import ma.ac.supmti.pfe.dto.ClassDto;
-import ma.ac.supmti.pfe.dto.ClassroomDto;
+
 import ma.ac.supmti.pfe.dto.SubjectDto;
 import ma.ac.supmti.pfe.facade.ModuleFacade;
 import ma.ac.supmti.pfe.facade.SubjectFacade;
-import ma.ac.supmti.pfe.model.ClassroomModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,9 +66,8 @@ public class SubjectController {
 
     @RequestMapping("/get/all")
     @ResponseBody
-    public List<SubjectDto> getAllSubjects(@Param("classId") Long classId){
+    public List<SubjectDto> getAllSubjects(@RequestParam("classId") Long classId){
         return subjectFacade.getAllSubjectsDtos(classId);
     }
-
 
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css">
+</head>
+<body>
+    
+    <div id="calendar"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'fr',
+            firstDay: 1,
+            initialView: 'timeGridWeek'
+        });
+        calendar.render();
+        var dateStr1 = '2020-08-22T10:00:00'
+        var date1 = new Date(dateStr1);
+
+        var dateStr2 = '2020-08-22T12:00:00'
+        var date2 = new Date(dateStr2);
+        calendar.addEvent({
+              title: 'Science',
+              start: date1,
+              end: date2
+            });
+      });
+  
+      
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js"></script>
+</body>
+</html>
