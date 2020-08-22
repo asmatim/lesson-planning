@@ -64,7 +64,7 @@ public class SubjectController {
         return "/subject/list";
     }
 
-    @RequestMapping("/get/all")
+    @RequestMapping(value = "/get/all", method = RequestMethod.POST)
     @ResponseBody
     public List<SubjectDto> getAllSubjects(@RequestParam("classId") Long classId){
         return subjectFacade.getAllSubjectsDtos(classId);

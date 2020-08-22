@@ -13,10 +13,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -58,6 +55,12 @@ public class LessonController {
         model.addAttribute("dummy", lessonDto);
         model.addAttribute("title", title);
         return "/lesson/plan";
+    }
+
+    @RequestMapping(value = "/get/all", method = RequestMethod.POST)
+    @ResponseBody
+    public List<LessonDto> getAllLessonsForClass(@RequestParam("classId") Long classId) {
+        return lessonFacade.getAllLessonDtos(classId);
     }
 
     @InitBinder

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import ma.ac.supmti.pfe.model.LessonModel;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface LessonDao extends JpaRepository<LessonModel, Long> {
@@ -62,4 +63,6 @@ public interface LessonDao extends JpaRepository<LessonModel, Long> {
             "        (les.startDate = :lessonStartsAt AND les.endDate = :lessonEndsAt)" +
             "    )")
     Boolean isProfessorFree(@Param("professor") ProfessorModel professor,@Param("lessonStartsAt") Date lessonStartsAt,@Param("lessonEndsAt") Date lessonEndsAt);
+
+    List<LessonModel> findByClassModel(ClassModel classModel);
 }

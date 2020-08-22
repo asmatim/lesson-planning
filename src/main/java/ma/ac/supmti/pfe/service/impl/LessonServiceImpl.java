@@ -32,6 +32,11 @@ public class LessonServiceImpl implements LessonService {
         lessonDao.delete(lessonModel);
     }
 
+    @Override
+    public List<LessonModel> getLessonsByClass(ClassModel classModel) {
+        return lessonDao.findByClassModel(classModel);
+    }
+
     private void validateLesson(LessonModel lessonModel) {
         final List<String> errors = new ArrayList<>();
 

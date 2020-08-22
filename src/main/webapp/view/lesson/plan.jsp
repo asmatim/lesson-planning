@@ -9,7 +9,7 @@
 			<h5 class="card-header">Planification séances</h5>
 			<div class="card-body">
 				<h5 class="card-title">Gérer l'emploi du temps des classes</h5>
-				<form:form modelAttribute="dummy">
+				<form:form modelAttribute="dummy" id="plan-lesson-form">
 					<div class="form-group">
                         <label for="lClass">Classe</label>
                         <form:select id="lClass" class="form-control" path="classId">
@@ -35,8 +35,17 @@
                             <select id="lSubject" class="form-control" name="subjectId">
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="lStartDate">Date de début</label>
+                            <input id="lStartDate" class="form-control" name="lStartDate" type="datetime-local" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lEndDate">Date de fin</label>
+                            <input id="lEndDate" class="form-control" name="lEndDate" type="datetime-local" />
+                        </div>
 					</div>
-					<input type="button" class="btn btn-primary" value="Valider" />
+					<input type="button" class="btn btn-primary" value="Valider" id="btn-add-lesson" />
+                    <div class="form-errors mt-1"></div>
 				</form:form>
 				<div id="calendar"></div>
 			</div>

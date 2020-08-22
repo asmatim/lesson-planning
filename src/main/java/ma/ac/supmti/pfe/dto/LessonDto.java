@@ -5,14 +5,32 @@ import java.util.List;
 
 public class LessonDto {
 
+    private Long lessonId;
     private Long professorId;
     private Long classroomId;
     private Long classId;
     private Long subjectId;
+    private String subjectName;
     private Date startDate;
     private Date endDate;
 
     private List<String> lessonErrors;
+
+    public Long getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(Long lessonId) {
+        this.lessonId = lessonId;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
 
     public Long getProfessorId() {
         return professorId;
