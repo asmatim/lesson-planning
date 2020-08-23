@@ -11,4 +11,6 @@ public interface LessonService {
     void delete(LessonModel lessonModel);
 
     List<LessonModel> getLessonsByClass(ClassModel classModel);
+
+    LessonModel getLesson(Long lessonId);
 }

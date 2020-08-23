@@ -37,6 +37,11 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.findByClassModel(classModel);
     }
 
+    @Override
+    public LessonModel getLesson(Long lessonId) {
+        return lessonDao.getOne(lessonId);
+    }
+
     private void validateLesson(LessonModel lessonModel) {
         final List<String> errors = new ArrayList<>();
 

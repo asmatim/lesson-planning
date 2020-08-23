@@ -12,7 +12,14 @@ function initFullCalendar() {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
         locale: 'fr',
-        firstDay: 1
+        firstDay: 1,
+        eventClick: function(info) {
+            info.jsEvent.preventDefault(); // don't let the browser navigate
+
+            if (info.event.id) {
+              showModalForLesson(info.event.id);
+            }
+          }
     });
     calendar.render();
     lessonsFullCalendar = calendar;
@@ -41,8 +48,9 @@ function loadSubjectsForSelectedClass(selectClass) {
 
 function reloadSubjects(subjectsResult) {
     $("#lSubject option").remove(); // Remove all <option> child tags.
+    $("#modal-lSubject option").remove(); // Remove all <option> child tags.
     $.each(subjectsResult, function(index, item) { // Iterates through a collection
-        $("#lSubject").append( // Append an object to the inside of the select box
+        $("#lSubject, #modal-lSubject").append( // Append an object to the inside of the select box
             $("<option></option>") // Create option tag.
                 .text(item.name)
                 .val(item.subjectId)
@@ -116,8 +124,25 @@ function bindAddLesson() {
 
 function addLessonToCalendar(lessonToAdd) {
     lessonsFullCalendar.addEvent({
+      id: lessonToAdd.lessonId,
       title: lessonToAdd.subjectName,
       start: lessonToAdd.startDate,
       end: lessonToAdd.endDate
     });
 }
+
+function showModalForLesson(lessonId) {
+    $.get("/lesson/get/" + lessonId)
+      .done(function( lessonResult ) {
+        if(lessonResult !== null && lessonResult.lessonErrors == null) {
+            $("#modal-lClass").val(      lessonResult.classId);
+            $("#modal-lProfessor").val(  lessonResult.professorId);
+            $("#modal-lSubject").val(    lessonResult.subjectId);
+            $("#modal-lClassroom").val(  lessonResult.classroomId);
+            $("#modal-lStartDate").val(  dayjs(lessonResult.startDate).format('YYYY-MM-DDThh:mm:ss.SSS'));
+            $("#modal-lEndDate").val(    dayjs(lessonResult.endDate).format('YYYY-MM-DDThh:mm:ss.SSS'));
+        }
+        $('#lesson-update-modal').modal('show');
+    });
+}
+

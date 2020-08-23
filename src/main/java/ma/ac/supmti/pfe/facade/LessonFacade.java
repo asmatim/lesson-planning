@@ -9,4 +9,6 @@ public interface LessonFacade {
     LessonDto save(LessonDto lessonDto);
 
     List<LessonDto> getAllLessonDtos(Long classId);
+
+    LessonDto getLesson(Long lessonId);
 }

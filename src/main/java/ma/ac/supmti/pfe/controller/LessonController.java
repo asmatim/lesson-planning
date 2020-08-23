@@ -63,6 +63,12 @@ public class LessonController {
         return lessonFacade.getAllLessonDtos(classId);
     }
 
+    @RequestMapping(value = "/get/{lessonId}")
+    @ResponseBody
+    public LessonDto getLesson(@PathVariable("lessonId") Long lessonId) {
+        return lessonFacade.getLesson(lessonId);
+    }
+
     @InitBinder
     public void bindingPreparation(WebDataBinder binder) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");

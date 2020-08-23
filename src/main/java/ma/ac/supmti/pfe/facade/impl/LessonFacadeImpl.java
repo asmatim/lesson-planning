@@ -51,6 +51,12 @@ public class LessonFacadeImpl implements LessonFacade {
         return reverseConvertAll(lessonModels);
     }
 
+    @Override
+    public LessonDto getLesson(Long lessonId) {
+        LessonModel lessonModel = lessonService.getLesson(lessonId);
+        return reverseConvert(lessonModel);
+    }
+
     private List<LessonDto> reverseConvertAll(List<LessonModel> lessonModels) {
         List<LessonDto> lessonDtos = new ArrayList<>();
         for (LessonModel lessonModel: lessonModels) {
