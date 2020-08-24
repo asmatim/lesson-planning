@@ -69,6 +69,12 @@ public class LessonController {
         return lessonFacade.getLesson(lessonId);
     }
 
+    @RequestMapping(value = "/delete/{lessonId}")
+    @ResponseBody
+    public LessonDto deleteLesson(@PathVariable("lessonId") Long lessonId) {
+        return lessonFacade.deleteLesson(lessonId);
+    }
+
     @InitBinder
     public void bindingPreparation(WebDataBinder binder) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -1,6 +1,7 @@
 package ma.ac.supmti.pfe.service.impl;
 
 import ma.ac.supmti.pfe.dao.LessonDao;
+import ma.ac.supmti.pfe.dto.LessonDto;
 import ma.ac.supmti.pfe.exception.InvalidLessonModelException;
 import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ClassroomModel;
@@ -76,20 +77,36 @@ public class LessonServiceImpl implements LessonService {
         final ClassroomModel classroomModel = lessonModel.getClassroom();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        return lessonDao.isClassroomFree(classroomModel, lessonStartsAt, lessonEndsAt);
+        if(Objects.nonNull(lessonModel.getId())) {
+            return lessonDao.isClassroomFree(classroomModel, lessonStartsAt, lessonEndsAt, lessonModel);
+        }
+        else {
+            return lessonDao.isClassroomFree(classroomModel, lessonStartsAt, lessonEndsAt);
+        }
+
     }
 
     private Boolean checkClassIsFree(LessonModel lessonModel) {
         final ClassModel classModel = lessonModel.getClassModel();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        return lessonDao.isClassFree(classModel, lessonStartsAt, lessonEndsAt);
+        if(Objects.nonNull(lessonModel.getId())) {
+            return lessonDao.isClassFree(classModel, lessonStartsAt, lessonEndsAt, lessonModel);
+        }
+        else {
+            return lessonDao.isClassFree(classModel, lessonStartsAt, lessonEndsAt);
+        }
     }
 
     private Boolean checkProfessorIsFree(LessonModel lessonModel) {
         final ProfessorModel professorModel = lessonModel.getProfessor();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        return lessonDao.isProfessorFree(professorModel, lessonStartsAt, lessonEndsAt);
+        if(Objects.nonNull(lessonModel.getId())) {
+            return lessonDao.isProfessorFree(professorModel, lessonStartsAt, lessonEndsAt, lessonModel);
+        }
+        else {
+            return lessonDao.isProfessorFree(professorModel, lessonStartsAt, lessonEndsAt);
+        }
     }
 }

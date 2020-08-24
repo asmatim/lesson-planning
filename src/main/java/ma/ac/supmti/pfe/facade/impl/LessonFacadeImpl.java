@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class LessonFacadeImpl implements LessonFacade {
@@ -57,6 +58,22 @@ public class LessonFacadeImpl implements LessonFacade {
         return reverseConvert(lessonModel);
     }
 
+    @Override
+    public LessonDto deleteLesson(Long lessonId) {
+        LessonModel lessonModel = lessonService.getLesson(lessonId);
+        LessonDto lessonDto = reverseConvert(lessonModel);
+        try {
+            lessonService.delete(lessonModel);
+            return lessonDto;
+        }
+        catch (Exception exception) {
+            List<String> errors = new ArrayList<>();
+            errors.add("Erreur de suppression.");
+            lessonDto.setLessonErrors(errors);
+            return lessonDto;
+        }
+    }
+
     private List<LessonDto> reverseConvertAll(List<LessonModel> lessonModels) {
         List<LessonDto> lessonDtos = new ArrayList<>();
         for (LessonModel lessonModel: lessonModels) {
@@ -66,7 +83,13 @@ public class LessonFacadeImpl implements LessonFacade {
     }
 
     private LessonModel convertLesson(LessonDto lessonDto) {
-        final LessonModel lessonModel = new LessonModel();
+        LessonModel lessonModel;
+        if(Objects.nonNull(lessonDto.getLessonId()) && lessonDto.getLessonId() > 0) {
+            lessonModel = lessonService.getLesson(lessonDto.getLessonId());
+        }
+        else {
+            lessonModel = new LessonModel();
+        }
 
         ProfessorModel professorModel = professorService.getProfessor(lessonDto.getProfessorId());
         SubjectModel subjectModel = subjectService.getSubject(lessonDto.getSubjectId());

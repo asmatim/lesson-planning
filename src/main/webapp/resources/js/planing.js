@@ -4,6 +4,7 @@ $( document ).ready(function() {
 
     bindClassChange();
     bindAddLesson();
+    bindDeleteLesson();
     initFullCalendar();
 });
 
@@ -77,6 +78,11 @@ function reloadLessons(lessonsResult) {
 }
 
 function bindAddLesson() {
+    bindAddLessonBasicForm();
+    bindAddLessonModalForm();
+}
+
+function bindAddLessonBasicForm() {
     $("#btn-add-lesson").click(function(){
         var selectedClass = $("#lClass").children("option:selected").val();
         var selectedProfessor = $("#lProfessor").children("option:selected").val();
@@ -88,9 +94,6 @@ function bindAddLesson() {
         var formattedStartDate = dayjs(lessonStartDate).format("DD/MM/YYYY HH:mm");
         var formattedEndDate = dayjs(lessonEndDate).format("DD/MM/YYYY HH:mm");
 
-//        console.log(formattedStartDate);
-//        console.log(formattedEndDate);
-
         var lessonRequestData = {
             classId: selectedClass,
             professorId: selectedProfessor,
@@ -99,8 +102,6 @@ function bindAddLesson() {
             startDate: formattedStartDate,
             endDate: formattedEndDate
         };
-
-//        console.log(lessonRequestData);
 
         $.post("/lesson/add", lessonRequestData )
           .done(function( lessonResult ) {
@@ -112,6 +113,75 @@ function bindAddLesson() {
 
                 $.each(lessonResult.lessonErrors, function(index, item) { // Iterates through a collection
                     $("#plan-lesson-form .form-errors").append( // Append an object to the inside of the div
+                        $("<div></div>") // Create option tag.
+                            .text(item)
+                            .addClass("alert alert-danger")
+                    );
+                });
+            }
+          });
+    });
+}
+
+function bindAddLessonModalForm() {
+    $("#modal-btn-add-lesson").click(function(){
+        var selectedClass = $("#modal-lClass").children("option:selected").val();
+        var selectedProfessor = $("#modal-lProfessor").children("option:selected").val();
+        var selectedSubject = $("#modal-lSubject").children("option:selected").val();
+        var selectedClassroom = $("#modal-lClassroom").children("option:selected").val();
+        var lessonStartDate = $("#modal-lStartDate").val();
+        var lessonEndDate = $("#modal-lEndDate").val();
+        var selectedLesson = $("#modal-lLesson").val();
+
+        var formattedStartDate = dayjs(lessonStartDate).format("DD/MM/YYYY HH:mm");
+        var formattedEndDate = dayjs(lessonEndDate).format("DD/MM/YYYY HH:mm");
+
+        var lessonRequestData = {
+            classId: selectedClass,
+            professorId: selectedProfessor,
+            classroomId: selectedClassroom,
+            subjectId: selectedSubject,
+            startDate: formattedStartDate,
+            endDate: formattedEndDate,
+            lessonId: selectedLesson
+        };
+
+        $.post("/lesson/add", lessonRequestData )
+          .done(function( lessonResult ) {
+            if(lessonResult !== null && lessonResult.lessonErrors == null) {
+                deleteLessonFromCalendar(lessonResult.lessonId);
+                addLessonToCalendar(lessonResult);
+                $('#lesson-update-modal').modal('hide');
+            }
+            else {
+                $("#lesson-update-modal .modal-form-errors").empty();
+
+                $.each(lessonResult.lessonErrors, function(index, item) { // Iterates through a collection
+                    $("#lesson-update-modal .modal-form-errors").append( // Append an object to the inside of the div
+                        $("<div></div>") // Create option tag.
+                            .text(item)
+                            .addClass("alert alert-danger")
+                    );
+                });
+            }
+          });
+    });
+}
+
+function bindDeleteLesson() {
+    $("#modal-btn-delete-lesson").click(function(){
+        var selectedLesson = $("#modal-lLesson").val();
+        $.get("/lesson/delete/" + selectedLesson)
+          .done(function( lessonResult ) {
+            if(lessonResult !== null && lessonResult.lessonErrors == null) {
+                deleteLessonFromCalendar(lessonResult.lessonId);
+                $('#lesson-update-modal').modal('hide');
+            }
+            else {
+                $("#lesson-update-modal .modal-form-errors").empty();
+
+                $.each(lessonResult.lessonErrors, function(index, item) { // Iterates through a collection
+                    $("#lesson-update-modal .modal-form-errors").append( // Append an object to the inside of the div
                         $("<div></div>") // Create option tag.
                             .text(item)
                             .addClass("alert alert-danger")
@@ -131,18 +201,24 @@ function addLessonToCalendar(lessonToAdd) {
     });
 }
 
+function deleteLessonFromCalendar(lessonId) {
+    lessonToDelete = lessonsFullCalendar.getEventById(lessonId);
+    lessonToDelete.remove();
+}
+
 function showModalForLesson(lessonId) {
     $.get("/lesson/get/" + lessonId)
       .done(function( lessonResult ) {
         if(lessonResult !== null && lessonResult.lessonErrors == null) {
+            $("#modal-lLesson").val(      lessonResult.lessonId);
             $("#modal-lClass").val(      lessonResult.classId);
             $("#modal-lProfessor").val(  lessonResult.professorId);
             $("#modal-lSubject").val(    lessonResult.subjectId);
             $("#modal-lClassroom").val(  lessonResult.classroomId);
             $("#modal-lStartDate").val(  dayjs(lessonResult.startDate).format('YYYY-MM-DDThh:mm:ss.SSS'));
             $("#modal-lEndDate").val(    dayjs(lessonResult.endDate).format('YYYY-MM-DDThh:mm:ss.SSS'));
+            $('#lesson-update-modal').modal('show');
         }
-        $('#lesson-update-modal').modal('show');
     });
 }
 

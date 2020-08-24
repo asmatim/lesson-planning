@@ -93,11 +93,13 @@
                     <label for="modal-lEndDate">Date de fin</label>
                     <input id="modal-lEndDate" class="form-control" name="lEndDate" type="datetime-local" />
                 </div>
+                <input id="modal-lLesson" class="form-control" name="lLessonId" type="hidden" />
                 <div class="modal-form-errors mt-1"></div>
               </form:form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" id="modal-btn-delete-lesson">Supprimer</button>
                 <button type="button" class="btn btn-primary" id="modal-btn-add-lesson">Valider</button>
               </div>
             </div>
