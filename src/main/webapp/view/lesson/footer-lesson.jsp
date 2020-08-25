@@ -5,7 +5,7 @@
 
 <footer class="footer fixed-bottom">
 	<div class="container">
-		<span class="text-muted float-left">Réalisé par </span>
+		<span class="text-muted float-left">Réalisé par Asma TIMZIT</span>
 		<span class="text-muted float-right">SupMTI 2019-2020</span>
 	</div>
 </footer>
