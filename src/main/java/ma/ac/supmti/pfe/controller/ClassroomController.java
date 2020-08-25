@@ -34,6 +34,15 @@ public class ClassroomController {
         return "redirect:/classroom/detail/" + classroom.getId();
     }
 
+    @RequestMapping("/edit/{id}")
+    public String showUpdateClassroomForm(Model model, @PathVariable("id") Long classroomId){
+        String title = "Modifier Salle";
+        ClassroomDto classroom = classroomFacade.getClassroomDto(classroomId);
+        model.addAttribute("classroom", classroom);
+        model.addAttribute("title", title);
+        return "/classroom/create";
+    }
+
     @RequestMapping("/detail/{classroomId}")
     public String showClassroomDetail(Model model, @PathVariable("classroomId") Long classroomId){
         ClassroomModel classroom = classroomFacade.getClassroom(classroomId);

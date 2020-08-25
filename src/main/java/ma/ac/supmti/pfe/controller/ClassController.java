@@ -39,6 +39,17 @@ public class ClassController {
         return "redirect:/class/detail/"+ classe.getId();
     }
 
+    @RequestMapping("/edit/{id}")
+    public String showUpdateClassForm(Model model, @PathVariable("id") Long classId){
+        String title = "Modifier Classe";
+        ClassDto classe = classFacade.getClass(classId);
+        final List<BranchModel> branches = branchFacade.findAllBranches();
+        model.addAttribute("title", title);
+        model.addAttribute("classe", classe);
+        model.addAttribute("branches", branches);
+        return "/class/create";
+    }
+
     @RequestMapping("/detail/{classId}")
     public String showClassDetail(Model model, @PathVariable("classId") Long classId){
         ClassModel classe = classFacade.getOneClass(classId);

@@ -27,9 +27,18 @@ public class BranchController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String processModuleForm(@ModelAttribute BranchDto branchDto){
+    public String processBranchForm(@ModelAttribute BranchDto branchDto){
         BranchModel branch = branchFacade.save(branchDto);
         return "redirect:/branch/detail/" + branch.getId();
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String showUpdateBranchForm(Model model, @PathVariable("id") Long branchId){
+        String title = "Modifier Branche";
+        BranchDto branch = branchFacade.getBranchDto(branchId);
+        model.addAttribute("branch", branch);
+        model.addAttribute("title", title);
+        return "/branch/create";
     }
 
     @RequestMapping("/detail/{branchId}")

@@ -4,6 +4,7 @@ import ma.ac.supmti.pfe.dto.SubjectDto;
 import ma.ac.supmti.pfe.facade.SubjectFacade;
 import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ModuleModel;
+import ma.ac.supmti.pfe.model.ProfessorModel;
 import ma.ac.supmti.pfe.model.SubjectModel;
 import ma.ac.supmti.pfe.service.ClassService;
 import ma.ac.supmti.pfe.service.ModuleService;
@@ -59,6 +60,12 @@ public class SubjectFacadeImpl  implements SubjectFacade {
         return reverseConvertAll(subjects);
     }
 
+    @Override
+    public SubjectDto getSubjectDto(Long subjectId) {
+        SubjectModel subjectModel = subjectService.getSubject(subjectId);
+        return reverseConvert(subjectModel);
+    }
+
     private List<SubjectDto> reverseConvertAll(List<SubjectModel> subjects) {
         List<SubjectDto> subjectDtos = new ArrayList<>();
         for (SubjectModel subjectModel : subjects) {
@@ -71,12 +78,14 @@ public class SubjectFacadeImpl  implements SubjectFacade {
         SubjectDto subjectDto = new SubjectDto();
         subjectDto.setSubjectId(subjectModel.getId());
         subjectDto.setName(subjectModel.getName());
+        subjectDto.setVolume(subjectModel.getVolume());
         return subjectDto;
     }
 
     private SubjectModel convertSubject(SubjectDto subjectDto){
         final SubjectModel subjectModel = new SubjectModel();
         final ModuleModel moduleModel = moduleService.getOne(subjectDto.getModuleId());
+        subjectModel.setId(subjectDto.getSubjectId());
         subjectModel.setName(subjectDto.getName());
         subjectModel.setVolume(subjectDto.getVolume());
         subjectModel.setModule(moduleModel);

@@ -42,6 +42,17 @@ public class ModuleController {
         return "redirect:/module/detail/" + module.getId();
     }
 
+    @RequestMapping("/edit/{id}")
+    public String showUpdateModuleForm(Model model, @PathVariable("id") Long moduleId){
+        String title = "Modifier Module";
+        ModuleDto module = moduleFacade.getModuleDto(moduleId);
+        List<BranchModel> branches = branchFacade.findAllBranches();
+        model.addAttribute("module", module);
+        model.addAttribute("title", title);
+        model.addAttribute("branches", branches);
+        return "/module/create";
+    }
+
     @RequestMapping("/detail/{moduleId}")
     public String showModuleDetail(Model model, @PathVariable("moduleId") Long moduleId){
         ModuleModel module = moduleFacade.getModule(moduleId);

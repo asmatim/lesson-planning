@@ -16,4 +16,6 @@ public interface BranchFacade {
     BranchModel getBranch(Long branchId);
 
     List<BranchModel> findAllBranches();
+
+    BranchDto getBranchDto(Long branchId);
 }

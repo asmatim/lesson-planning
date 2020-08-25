@@ -33,6 +33,15 @@ public class ProfessorController {
         return "redirect:/professor/detail/" + professorModel.getId();
     }
 
+    @RequestMapping("/edit/{id}")
+    public String showUpdateProfForm(Model model, @PathVariable("id") Long professorId){
+        String title = "Modifier Professeur";
+        ProfessorDto professor = professorFacade.getProfessorDto(professorId);
+        model.addAttribute("professor", professor);
+        model.addAttribute("title", title);
+        return "/professor/create";
+    }
+
     @RequestMapping("/detail/{professorId}")
     public String showProfDetail(Model model, @PathVariable("professorId") Long professorId){
         ProfessorModel professorModel = professorFacade.getProfessor(professorId);

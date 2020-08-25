@@ -46,6 +46,20 @@ public class ModuleFacadeimpl implements ModuleFacade {
         return moduleService.findAllModules();
     }
 
+    @Override
+    public ModuleDto getModuleDto(Long moduleId) {
+        ModuleModel moduleModel = moduleService.getOne(moduleId);
+        return reverseConvertModule(moduleModel);
+    }
+
+    private ModuleDto reverseConvertModule(ModuleModel moduleModel) {
+        ModuleDto moduleDto = new ModuleDto();
+        moduleDto.setModuleId(moduleModel.getId());
+        moduleDto.setBranchId(moduleModel.getBranch().getId());
+        moduleDto.setName(moduleModel.getName());
+        return moduleDto;
+    }
+
     private ModuleModel convertModule(ModuleDto moduleDto){
         final ModuleModel moduleModel = new ModuleModel();
         final BranchModel branchModel = branchService.getBranch(moduleDto.getBranchId());

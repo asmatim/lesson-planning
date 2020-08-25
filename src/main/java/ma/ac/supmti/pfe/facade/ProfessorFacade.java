@@ -16,4 +16,6 @@ public interface ProfessorFacade {
     List<ProfessorModel> getAllProfessors();
 
     List<ProfessorDto> getAllProfessorsDtos();
+
+    ProfessorDto getProfessorDto(Long professorId);
 }

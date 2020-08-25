@@ -44,6 +44,12 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
         return reverseConvertAll(professors);
     }
 
+    @Override
+    public ProfessorDto getProfessorDto(Long professorId) {
+        ProfessorModel professorModel = professorService.getProfessor(professorId);
+        return reverseConvert(professorModel);
+    }
+
     private List<ProfessorDto> reverseConvertAll(List<ProfessorModel> professors) {
         List<ProfessorDto> professorDtos = new ArrayList<>();
         for (ProfessorModel professorModel : professors) {
@@ -57,11 +63,16 @@ public class ProfessorFacadeImpl implements ProfessorFacade {
         professorDto.setProfessorId(professorModel.getId());
         professorDto.setFirstName(professorModel.getFirstName());
         professorDto.setLastName(professorModel.getLastName());
+        professorDto.setBirthdate(professorModel.getBirthdate());
+        professorDto.setEmail(professorModel.getEmail());
+        professorDto.setCin(professorModel.getCin());
+        professorDto.setPhone(professorModel.getPhone());
         return professorDto;
     }
 
     private ProfessorModel convertProfessor(ProfessorDto professorDto) {
         final ProfessorModel professorModel = new ProfessorModel();
+        professorModel.setId(professorDto.getProfessorId());
         professorModel.setFirstName(professorDto.getFirstName());
         professorModel.setLastName(professorDto.getLastName());
         professorModel.setCin(professorDto.getCin());

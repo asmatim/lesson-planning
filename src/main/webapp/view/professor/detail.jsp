@@ -17,8 +17,8 @@
 						<span class="font-weight-bold">Nom: </span>${professor.lastName}</p>
 					<p>
 						<span class="font-weight-bold">Prénom: </span>${professor.firstName}</p>
-					<p>
-						<span class="font-weight-bold">Date de naissance: </span>${professor.birthdate}</p>
+					<!-- <p>
+						<span class="font-weight-bold">Date de naissance: </span>${professor.birthdate}</p>-->
 					<p>
 						<span class="font-weight-bold">Email: </span>${professor.email}</p>
 				</div>

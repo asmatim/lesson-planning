@@ -49,6 +49,12 @@ public class ClassroomFacadeImp implements ClassroomFacade {
         return reverseConvertAll(classrooms);
     }
 
+    @Override
+    public ClassroomDto getClassroomDto(Long classroomId) {
+        ClassroomModel classroomModel = classroomService.getClassroom(classroomId);
+        return reverseConvert(classroomModel);
+    }
+
     private List<ClassroomDto> reverseConvertAll(List<ClassroomModel> classrooms) {
         List<ClassroomDto> classroomDtos = new ArrayList<>();
         for (ClassroomModel classroomModel:classrooms ) {
@@ -61,11 +67,13 @@ public class ClassroomFacadeImp implements ClassroomFacade {
         ClassroomDto classroomDto = new ClassroomDto();
         classroomDto.setClassroomId(classroomModel.getId());
         classroomDto.setName(classroomModel.getName());
+        classroomDto.setCapacity(classroomModel.getCapacity());
         return classroomDto;
     }
 
     private ClassroomModel convertClassroom(ClassroomDto classroomDto){
         final ClassroomModel classroomModel = new ClassroomModel();
+        classroomModel.setId(classroomDto.getClassroomId());
         classroomModel.setName(classroomDto.getName());
         classroomModel.setCapacity(classroomDto.getCapacity());
         return classroomModel;

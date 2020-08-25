@@ -8,9 +8,9 @@
 <div class="main">
 	<div class="container">
 		<div class="card">
-			<h5 class="card-header">Informations professeur</h5>
+			<h5 class="card-header">Sauvegarde professeur</h5>
 			<div class="card-body">
-				<h5 class="card-title">Créer un professeur</h5>
+				<h5 class="card-title">Infos professeur</h5>
 				<form:form action="${createUrl}" method="POST" modelAttribute="professor">
 
 					<div class="form-group">
@@ -42,6 +42,7 @@
 					<c:if test="${not empty professorId}">
 						<form:hidden id="pId" path="professorId" />
 					</c:if>
+					<form:hidden id="pId" class="form-control" path="professorId" />
 					<input type="submit" class="btn btn-primary" value="Valider" />
 				</form:form>
 			</div>

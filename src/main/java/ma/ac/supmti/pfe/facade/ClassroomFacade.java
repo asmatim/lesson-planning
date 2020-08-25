@@ -14,4 +14,6 @@ public interface ClassroomFacade {
     ClassroomModel getClassroom(Long classroomId);
 
     List<ClassroomDto> getAllClassroomsDtos();
+
+    ClassroomDto getClassroomDto(Long classroomId);
 }

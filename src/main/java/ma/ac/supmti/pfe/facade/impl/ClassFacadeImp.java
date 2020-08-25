@@ -46,6 +46,12 @@ public class ClassFacadeImp implements ClassFacade {
         return reverseConvertAll(classes);
     }
 
+    @Override
+    public ClassDto getClass(Long classId) {
+        ClassModel classModel = classService.getOneClass(classId);
+        return reverseConvert(classModel);
+    }
+
     private List<ClassDto> reverseConvertAll(List<ClassModel> classes) {
         List<ClassDto> classDtos = new ArrayList<>();
         for (ClassModel classModel : classes) {
@@ -58,12 +64,15 @@ public class ClassFacadeImp implements ClassFacade {
         ClassDto classDto = new ClassDto();
         classDto.setClassId(classModel.getId());
         classDto.setName(classModel.getName());
+        classDto.setYear(classModel.getYear());
+        classDto.setBranchId(classModel.getBranch().getId());
         return classDto;
     }
 
     private ClassModel convertClass(ClassDto classDto){
         final ClassModel classModel = new ClassModel();
         final BranchModel branchModel = branchService.getBranch(classDto.getBranchId());
+        classModel.setId(classDto.getClassId());
         classModel.setName(classDto.getName());
         classModel.setYear(classDto.getYear());
         classModel.setBranch(branchModel);

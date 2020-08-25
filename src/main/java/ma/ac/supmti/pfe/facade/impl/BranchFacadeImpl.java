@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class BranchFacadeImpl implements BranchFacade {
@@ -25,7 +26,6 @@ public class BranchFacadeImpl implements BranchFacade {
     @Override
     public void delete(BranchDto branchDto) {
         BranchModel branchModel = convertBranch((branchDto));
-        // not working
         branchService.delete(branchModel);
     }
 
@@ -44,8 +44,22 @@ public class BranchFacadeImpl implements BranchFacade {
         return branchService.findAllBranches();
     }
 
+    @Override
+    public BranchDto getBranchDto(Long branchId) {
+        final BranchModel branchModel = branchService.getBranch(branchId);
+        return reverseConvertBranch(branchModel);
+    }
+
+    private BranchDto reverseConvertBranch(BranchModel branchModel) {
+        final BranchDto branchDto = new BranchDto();
+        branchDto.setBranchId(branchModel.getId());
+        branchDto.setName(branchModel.getName());
+        return branchDto;
+    }
+
     private BranchModel convertBranch(BranchDto branchDto) {
         final BranchModel branchModel = new BranchModel();
+        branchModel.setId(branchDto.getBranchId());
         branchModel.setName(branchDto.getName());
         return branchModel;
     }

@@ -14,4 +14,6 @@ public interface SubjectFacade {
     List<SubjectModel> getAllSubjects();
 
     List<SubjectDto> getAllSubjectsDtos(Long classId);
+
+    SubjectDto getSubjectDto(Long subjectId);
 }

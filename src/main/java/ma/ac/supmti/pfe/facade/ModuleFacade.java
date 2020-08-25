@@ -16,4 +16,6 @@ public interface ModuleFacade {
     ModuleModel getModule(Long moduleId);
 
     List<ModuleModel> findAllModules();
+
+    ModuleDto getModuleDto(Long moduleId);
 }

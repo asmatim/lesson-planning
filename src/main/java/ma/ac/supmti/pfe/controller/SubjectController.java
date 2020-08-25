@@ -40,6 +40,17 @@ public class SubjectController {
         return "redirect:/subject/detail/" + subject.getId();
     }
 
+    @RequestMapping("/edit/{id}")
+    public String showUpdateSubjectForm(Model model, @PathVariable("id") Long subjectId){
+        String title = "Modifier matière";
+        SubjectDto subject = subjectFacade.getSubjectDto(subjectId);
+        final List<ModuleModel> modules = moduleFacade.findAllModules();
+        model.addAttribute("subject", subject);
+        model.addAttribute("title", title);
+        model.addAttribute("modules", modules);
+        return "/subject/create";
+    }
+
     @RequestMapping("/detail/{subjectId}")
     public String showSubjectDetail(Model model, @PathVariable("subjectId") Long subjectId){
         SubjectModel subject = subjectFacade.getSubject(subjectId);

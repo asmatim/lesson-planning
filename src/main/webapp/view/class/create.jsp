@@ -3,14 +3,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../header.jsp"></jsp:include>
-<spring:url value="/class/create" var="createrUrl" />
+<spring:url value="/class/create" var="createUrl" />
 
 <div class="main">
 	<div class="container">
 		<div class="card">
-			<h5 class="card-header">Nouvelle classe</h5>
+			<h5 class="card-header">Sauvegarde classe</h5>
 			<div class="card-body">
-				<h5 class="card-title">Créer une nouvelle classe</h5>
+				<h5 class="card-title">Infos classe</h5>
 				<form:form action="${createUrl}" method="post" modelAttribute="classe">
 					<div class="form-group">
 						<label for="cName">Nom</label>
@@ -24,6 +24,7 @@
                                <form:options items="${branches}" itemLabel="name" itemValue="id" />
                         </form:select>
                     </div>
+                    <form:hidden id="cId" class="form-control"	path="classId" />
 					<input type="submit" class="btn btn-primary" value="Valider" />
 				</form:form>
 			</div>
