@@ -2,6 +2,8 @@ package ma.ac.supmti.pfe.controller;
 
 import ma.ac.supmti.pfe.dto.ClassDto;
 import ma.ac.supmti.pfe.dto.ProfessorDto;
+import ma.ac.supmti.pfe.dto.StatsDto;
+import ma.ac.supmti.pfe.facade.ClassFacade;
 import ma.ac.supmti.pfe.facade.ProfessorFacade;
 import ma.ac.supmti.pfe.model.ProfessorModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ProfessorController {
 
     @Autowired
     private ProfessorFacade professorFacade;
+
+    @Autowired
+    private ClassFacade classFacade;
 
     @RequestMapping("/create")
     public String showProfForm(Model model){
@@ -64,6 +69,29 @@ public class ProfessorController {
         model.addAttribute("title", title);
         model.addAttribute("professors", professors);
         return "/professor/list";
+    }
+
+    @RequestMapping("/stats/{id}")
+    public String showProfStatsForm(Model model, @PathVariable("id") Long professorId){
+        String title = "Statistiques Professeur";
+        List<ClassDto> classes = classFacade.getAllClassesDtos();
+        StatsDto statsDto = new StatsDto();
+        statsDto.setProfessorId(professorId);
+        model.addAttribute("stats", statsDto);
+        model.addAttribute("classes", classes);
+        model.addAttribute("title", title);
+        return "/professor/stats";
+    }
+
+    @RequestMapping(value = "/stats", method = RequestMethod.POST)
+    public String processProfStatsForm(Model model, StatsDto statsDto){
+        String title = "Statistiques Professeur";
+        List<ClassDto> classes = classFacade.getAllClassesDtos();
+        StatsDto statsResult = professorFacade.getStatsFor(statsDto.getProfessorId(), statsDto.getClassId());
+        model.addAttribute("stats", statsResult);
+        model.addAttribute("classes", classes);
+        model.addAttribute("title", title);
+        return "/professor/stats";
     }
 
     @RequestMapping("/get/all")

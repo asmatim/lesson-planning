@@ -116,4 +116,8 @@ public interface LessonDao extends JpaRepository<LessonModel, Long> {
     Boolean isProfessorFree(@Param("professor") ProfessorModel professor,@Param("lessonStartsAt") Date lessonStartsAt,@Param("lessonEndsAt") Date lessonEndsAt);
 
     List<LessonModel> findByClassModel(ClassModel classModel);
+
+    List<LessonModel> findByClassModelAndProfessor(ClassModel classModel, ProfessorModel professorModel);
+
+    List<LessonModel> findByClassModelAndProfessorAndEndDateLessThan(ClassModel classModel, ProfessorModel professorModel, Date currentDate);
 }

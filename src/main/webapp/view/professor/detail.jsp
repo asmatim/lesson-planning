@@ -5,6 +5,7 @@
 <jsp:include page="../header.jsp"></jsp:include>
 <spring:url value="/professor/edit" var="editUrl" />
 <spring:url value="/professor/delete" var="deleteUrl" />
+<spring:url value="/professor/stats" var="statsUrl" />
 
 <div class="main">
 	<div class="container">
@@ -25,6 +26,7 @@
 				<div class="card-footer">
 					<div class="text-right">
 						<a href="${deleteUrl}/${professor.id}" class="btn btn-danger">Supprimer</a>
+						<a href="${statsUrl}/${professor.id}" class="btn btn-info">Avancement</a>
 						<a href="${editUrl}/${professor.id}" class="btn btn-primary">Modifier</a>
 					</div>
 				</div>

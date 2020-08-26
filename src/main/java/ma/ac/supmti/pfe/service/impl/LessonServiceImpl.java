@@ -1,13 +1,11 @@
 package ma.ac.supmti.pfe.service.impl;
 
 import ma.ac.supmti.pfe.dao.LessonDao;
-import ma.ac.supmti.pfe.dto.LessonDto;
 import ma.ac.supmti.pfe.exception.InvalidLessonModelException;
 import ma.ac.supmti.pfe.model.ClassModel;
 import ma.ac.supmti.pfe.model.ClassroomModel;
 import ma.ac.supmti.pfe.model.LessonModel;
 import ma.ac.supmti.pfe.model.ProfessorModel;
-import ma.ac.supmti.pfe.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ma.ac.supmti.pfe.service.LessonService;
@@ -41,6 +39,11 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public LessonModel getLesson(Long lessonId) {
         return lessonDao.getOne(lessonId);
+    }
+
+    @Override
+    public List<LessonModel> getLessonsByClassAndProfessor(ClassModel classModel, ProfessorModel professorModel) {
+        return lessonDao.findByClassModelAndProfessorAndEndDateLessThan(classModel, professorModel, new Date());
     }
 
     private void validateLesson(LessonModel lessonModel) {

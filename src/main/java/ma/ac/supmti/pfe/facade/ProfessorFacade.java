@@ -1,6 +1,7 @@
 package ma.ac.supmti.pfe.facade;
 
 import ma.ac.supmti.pfe.dto.ProfessorDto;
+import ma.ac.supmti.pfe.dto.StatsDto;
 import ma.ac.supmti.pfe.model.ProfessorModel;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ProfessorFacade {
     List<ProfessorDto> getAllProfessorsDtos();
 
     ProfessorDto getProfessorDto(Long professorId);
+
+    StatsDto getStatsFor(Long professorId, Long classId);
 }
