@@ -8,4 +8,5 @@ import ma.ac.supmti.pfe.model.ModeratorModel;
 @Repository
 public interface ModeratorDao extends JpaRepository<ModeratorModel, Long> {
 
+    ModeratorModel findByUsername(String username);
 }

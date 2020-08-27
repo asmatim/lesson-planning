@@ -8,3 +8,7 @@ FLUSH PRIVILEGES;
 
 GRANT ALL PRIVILEGES ON isi_suivi_cours.* TO 'isiuser'@'localhost';
 
+INSERT INTO `isi_suivi_cours`.`moderator`
+(`id`,`username`,`password`)
+VALUES
+( 1055 , 'admin', 'azerty');
