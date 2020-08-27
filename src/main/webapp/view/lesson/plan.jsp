@@ -102,6 +102,14 @@
                     <label for="modal-lEndDate">Date de fin</label>
                     <input id="modal-lEndDate" class="form-control" name="lEndDate" type="datetime-local" />
                 </div>
+                <div class="form-group form-check">
+                    <input id="modal-lIsRange" class="form-check-input" name="lIsRange" type="checkbox" />
+                    <label for="modal-lIsRange">Définir plage ? (valable juste pour suppression)</label>
+                </div>
+                <div class="form-group">
+                    <label for="modal-lRangeEndDate">Jusqu'au</label>
+                    <input id="modal-lRangeEndDate" class="form-control" name="lRangeEndDate" type="date" />
+                </div>
                 <input id="modal-lLesson" class="form-control" name="lLessonId" type="hidden" />
                 <div class="modal-form-errors mt-1"></div>
               </form:form>

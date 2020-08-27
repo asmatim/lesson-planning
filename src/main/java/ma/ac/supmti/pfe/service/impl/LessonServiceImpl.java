@@ -53,8 +53,17 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.saveAll(lessonModels);
     }
 
+    @Override
+    public void deleteRange(LessonModel lessonModel, Date rangeEndDate) {
+        List<LessonModel> lessonModels = lessonDao.findByClassModelAndSubjectAndProfessorAndStartDateBetween(
+                lessonModel.getClassModel(), lessonModel.getSubject(), lessonModel.getProfessor(),
+                lessonModel.getStartDate(), rangeEndDate);
+
+        lessonDao.deleteAll(lessonModels);
+    }
+
     private void validateLessons(List<LessonModel> lessonModels) {
-        for (LessonModel lessonModel: lessonModels) {
+        for (LessonModel lessonModel : lessonModels) {
             // will throw exception in case of invalid
             validateLesson(lessonModel);
         }
@@ -85,7 +94,7 @@ public class LessonServiceImpl implements LessonService {
     private void validateLesson(LessonModel lessonModel) {
         final List<String> errors = new ArrayList<>();
 
-        if(Boolean.FALSE.equals(checkDatesOrder(lessonModel))) {
+        if (Boolean.FALSE.equals(checkDatesOrder(lessonModel))) {
             errors.add("La date/heure de début de la séance doit être antérieure à la date de fin.");
         }
 
@@ -116,10 +125,9 @@ public class LessonServiceImpl implements LessonService {
         final ClassroomModel classroomModel = lessonModel.getClassroom();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        if(Objects.nonNull(lessonModel.getId())) {
+        if (Objects.nonNull(lessonModel.getId())) {
             return lessonDao.isClassroomFree(classroomModel, lessonStartsAt, lessonEndsAt, lessonModel);
-        }
-        else {
+        } else {
             return lessonDao.isClassroomFree(classroomModel, lessonStartsAt, lessonEndsAt);
         }
 
@@ -129,10 +137,9 @@ public class LessonServiceImpl implements LessonService {
         final ClassModel classModel = lessonModel.getClassModel();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        if(Objects.nonNull(lessonModel.getId())) {
+        if (Objects.nonNull(lessonModel.getId())) {
             return lessonDao.isClassFree(classModel, lessonStartsAt, lessonEndsAt, lessonModel);
-        }
-        else {
+        } else {
             return lessonDao.isClassFree(classModel, lessonStartsAt, lessonEndsAt);
         }
     }
@@ -141,10 +148,9 @@ public class LessonServiceImpl implements LessonService {
         final ProfessorModel professorModel = lessonModel.getProfessor();
         final Date lessonStartsAt = lessonModel.getStartDate();
         final Date lessonEndsAt = lessonModel.getEndDate();
-        if(Objects.nonNull(lessonModel.getId())) {
+        if (Objects.nonNull(lessonModel.getId())) {
             return lessonDao.isProfessorFree(professorModel, lessonStartsAt, lessonEndsAt, lessonModel);
-        }
-        else {
+        } else {
             return lessonDao.isProfessorFree(professorModel, lessonStartsAt, lessonEndsAt);
         }
     }

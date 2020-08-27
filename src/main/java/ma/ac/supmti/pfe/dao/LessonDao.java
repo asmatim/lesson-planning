@@ -1,14 +1,10 @@
 package ma.ac.supmti.pfe.dao;
 
-import ma.ac.supmti.pfe.model.ClassModel;
-import ma.ac.supmti.pfe.model.ClassroomModel;
-import ma.ac.supmti.pfe.model.ProfessorModel;
+import ma.ac.supmti.pfe.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import ma.ac.supmti.pfe.model.LessonModel;
 
 import java.util.Date;
 import java.util.List;
@@ -120,4 +116,6 @@ public interface LessonDao extends JpaRepository<LessonModel, Long> {
     List<LessonModel> findByClassModelAndProfessor(ClassModel classModel, ProfessorModel professorModel);
 
     List<LessonModel> findByClassModelAndProfessorAndEndDateLessThan(ClassModel classModel, ProfessorModel professorModel, Date currentDate);
+
+    List<LessonModel> findByClassModelAndSubjectAndProfessorAndStartDateBetween(ClassModel classModel, SubjectModel subject, ProfessorModel professor, Date startDate, Date rangeEndDate);
 }

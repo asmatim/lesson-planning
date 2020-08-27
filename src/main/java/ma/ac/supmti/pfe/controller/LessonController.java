@@ -69,10 +69,10 @@ public class LessonController {
         return lessonFacade.getLesson(lessonId);
     }
 
-    @RequestMapping(value = "/delete/{lessonId}")
+    @RequestMapping(value = "/delete")
     @ResponseBody
-    public LessonDto deleteLesson(@PathVariable("lessonId") Long lessonId) {
-        return lessonFacade.deleteLesson(lessonId);
+    public LessonDto deleteLesson(LessonDto lessonDto) {
+        return lessonFacade.deleteLesson(lessonDto);
     }
 
     @InitBinder

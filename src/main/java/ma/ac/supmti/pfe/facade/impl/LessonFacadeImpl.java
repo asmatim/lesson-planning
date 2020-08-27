@@ -71,13 +71,26 @@ public class LessonFacadeImpl implements LessonFacade {
         LessonDto lessonDto = reverseConvert(lessonModel);
         try {
             lessonService.delete(lessonModel);
-            return lessonDto;
         }
         catch (Exception exception) {
             List<String> errors = new ArrayList<>();
             errors.add("Erreur de suppression.");
             lessonDto.setLessonErrors(errors);
-            return lessonDto;
+        }
+        return lessonDto;
+    }
+
+    @Override
+    public LessonDto deleteLesson(LessonDto lessonDto) {
+        if(lessonDto.getIsRange()) {
+            LessonModel lessonModel = lessonService.getLesson(lessonDto.getLessonId());
+            lessonModel.setStartDate(lessonDto.getStartDate());
+            LessonDto removedLessonDto = reverseConvert(lessonModel);
+            lessonService.deleteRange(lessonModel, lessonDto.getRangeEndDate());
+            return removedLessonDto;
+        }
+        else {
+            return deleteLesson(lessonDto.getLessonId());
         }
     }
 

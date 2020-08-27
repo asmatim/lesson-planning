@@ -15,4 +15,6 @@ public interface LessonService {
     LessonModel getLesson(Long lessonId);
     List<LessonModel> getLessonsByClassAndProfessor(ClassModel classModel, ProfessorModel professorModel);
     List<LessonModel> saveRange(LessonModel lessonModel, Date rangeEndDate);
+
+    void deleteRange(LessonModel lessonModel, Date rangeEndDate);
 }

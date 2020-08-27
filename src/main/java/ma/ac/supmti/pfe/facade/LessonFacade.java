@@ -13,4 +13,6 @@ public interface LessonFacade {
     LessonDto getLesson(Long lessonId);
 
     LessonDto deleteLesson(Long lessonId);
+
+    LessonDto deleteLesson(LessonDto lessonDto);
 }

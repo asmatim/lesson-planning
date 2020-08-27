@@ -181,11 +181,29 @@ function bindAddLessonModalForm() {
 function bindDeleteLesson() {
     $("#modal-btn-delete-lesson").click(function(){
         var selectedLesson = $("#modal-lLesson").val();
-        $.get("/lesson/delete/" + selectedLesson)
+        var lessonStartDate = $("#modal-lStartDate").val();
+        var lessonIsRange = $("#modal-lIsRange").is(':checked');
+        var lRangeEndDate = $("#modal-lRangeEndDate").val();
+
+        var formattedStartDate = dayjs(lessonStartDate).format("DD/MM/YYYY HH:mm");
+        var formattedRangeEndDate = null;
+
+        if(lessonIsRange) {
+            formattedRangeEndDate = dayjs(lRangeEndDate).format("DD/MM/YYYY HH:mm");
+        }
+
+        var lessonRequestData = {
+            lessonId: selectedLesson,
+            startDate: formattedStartDate,
+            isRange: lessonIsRange,
+            rangeEndDate: formattedRangeEndDate
+        };
+        $.post("/lesson/delete/", lessonRequestData)
           .done(function( lessonResult ) {
             if(lessonResult !== null && lessonResult.lessonErrors == null) {
-                deleteLessonFromCalendar(lessonResult.lessonId);
+                loadLessonsForSelectedClass(lessonResult.classId);
                 $('#lesson-update-modal').modal('hide');
+                $("#lesson-update-modal .modal-form-errors").empty();
             }
             else {
                 $("#lesson-update-modal .modal-form-errors").empty();
