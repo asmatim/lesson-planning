@@ -46,6 +46,42 @@ public class LessonServiceImpl implements LessonService {
         return lessonDao.findByClassModelAndProfessorAndEndDateLessThan(classModel, professorModel, new Date());
     }
 
+    @Override
+    public List<LessonModel> saveRange(LessonModel lessonModel, Date rangeEndDate) {
+        List<LessonModel> lessonModels = createRange(lessonModel, rangeEndDate);
+        validateLessons(lessonModels);
+        return lessonDao.saveAll(lessonModels);
+    }
+
+    private void validateLessons(List<LessonModel> lessonModels) {
+        for (LessonModel lessonModel: lessonModels) {
+            // will throw exception in case of invalid
+            validateLesson(lessonModel);
+        }
+    }
+
+    private List<LessonModel> createRange(LessonModel lessonModel, Date rangeEndDate) {
+        final List<LessonModel> lessonModels = new ArrayList<>();
+        LessonModel lessonToAdd = lessonModel;
+        while (lessonToAdd.getStartDate().before(rangeEndDate)) {
+            lessonModels.add(lessonToAdd);
+            lessonToAdd = new LessonModel(lessonToAdd); // clone the object and set a new object with new date
+            lessonToAdd.setStartDate(getNextWeekDate(lessonToAdd.getStartDate()));
+            lessonToAdd.setEndDate(getNextWeekDate(lessonToAdd.getEndDate()));
+        }
+        return lessonModels;
+    }
+
+    private Date getNextWeekDate(Date dateToChange) {
+        Date newDate = new Date(dateToChange.getTime());
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(newDate);
+        calendar.add(Calendar.DATE, 7);
+        newDate.setTime(calendar.getTime().getTime());
+
+        return newDate;
+    }
+
     private void validateLesson(LessonModel lessonModel) {
         final List<String> errors = new ArrayList<>();
 

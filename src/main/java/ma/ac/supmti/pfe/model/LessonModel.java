@@ -34,6 +34,19 @@ public class LessonModel {
 	@ManyToOne
 	private SubjectModel subject;
 
+	public LessonModel() {
+	}
+
+	public LessonModel(LessonModel lessonModel) {
+		this.id = lessonModel.getId();
+		this.startDate = lessonModel.getStartDate();
+		this.endDate = lessonModel.getEndDate();
+		this.classModel = lessonModel.getClassModel();
+		this.classroom = lessonModel.getClassroom();
+		this.professor = lessonModel.getProfessor();
+		this.subject = lessonModel.getSubject();
+	}
+
 	public Long getId() {
 		return id;
 	}

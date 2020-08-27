@@ -13,6 +13,8 @@ public class LessonDto {
     private String subjectName;
     private Date startDate;
     private Date endDate;
+    private Boolean isRange;
+    private Date rangeEndDate;
 
     private List<String> lessonErrors;
 
@@ -86,5 +88,21 @@ public class LessonDto {
 
     public List<String> getLessonErrors() {
         return lessonErrors;
+    }
+
+    public Boolean getIsRange() {
+        return isRange;
+    }
+
+    public void setIsRange(Boolean isRange) {
+        this.isRange = isRange;
+    }
+
+    public Date getRangeEndDate() {
+        return rangeEndDate;
+    }
+
+    public void setRangeEndDate(Date rangeEndDate) {
+        this.rangeEndDate = rangeEndDate;
     }
 }

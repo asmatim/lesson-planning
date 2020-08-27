@@ -90,9 +90,16 @@ function bindAddLessonBasicForm() {
         var selectedClassroom = $("#lClassroom").children("option:selected").val();
         var lessonStartDate = $("#lStartDate").val();
         var lessonEndDate = $("#lEndDate").val();
+        var lessonIsRange = $("#lIsRange").is(':checked');
+        var lRangeEndDate = $("#lRangeEndDate").val();
 
         var formattedStartDate = dayjs(lessonStartDate).format("DD/MM/YYYY HH:mm");
         var formattedEndDate = dayjs(lessonEndDate).format("DD/MM/YYYY HH:mm");
+        var formattedRangeEndDate = null;
+
+        if(lessonIsRange) {
+            formattedRangeEndDate = dayjs(lRangeEndDate).format("DD/MM/YYYY HH:mm");
+        }
 
         var lessonRequestData = {
             classId: selectedClass,
@@ -100,13 +107,16 @@ function bindAddLessonBasicForm() {
             classroomId: selectedClassroom,
             subjectId: selectedSubject,
             startDate: formattedStartDate,
-            endDate: formattedEndDate
+            endDate: formattedEndDate,
+            isRange: lessonIsRange,
+            rangeEndDate: formattedRangeEndDate
         };
 
         $.post("/lesson/add", lessonRequestData )
           .done(function( lessonResult ) {
             if(lessonResult !== null && lessonResult.lessonErrors == null) {
-                addLessonToCalendar(lessonResult);
+                loadLessonsForSelectedClass(selectedClass);
+                $("#plan-lesson-form .form-errors").empty();
             }
             else {
                 $("#plan-lesson-form .form-errors").empty();

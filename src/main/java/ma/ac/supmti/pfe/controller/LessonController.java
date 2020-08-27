@@ -52,7 +52,7 @@ public class LessonController {
         model.addAttribute("classes", classes);
         model.addAttribute("professors", professors);
         model.addAttribute("classrooms", classrooms);
-        model.addAttribute("dummy", lessonDto);
+        model.addAttribute("lessonDto", lessonDto);
         model.addAttribute("title", title);
         return "/lesson/plan";
     }

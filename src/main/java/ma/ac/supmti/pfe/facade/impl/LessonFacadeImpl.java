@@ -34,8 +34,15 @@ public class LessonFacadeImpl implements LessonFacade {
     public LessonDto save(LessonDto lessonDto) {
         final LessonDto savedLessonDto;
         LessonModel lessonModel = convertLesson(lessonDto);
+        final LessonModel savedLesson;
         try {
-            final LessonModel savedLesson = lessonService.save(lessonModel);
+            if(Boolean.TRUE.equals(lessonDto.getIsRange())) {
+                List<LessonModel> savedLessons = lessonService.saveRange(lessonModel, lessonDto.getRangeEndDate());
+                savedLesson = savedLessons.get(0);
+            }
+            else {
+                savedLesson = lessonService.save(lessonModel);
+            }
             savedLessonDto = reverseConvert(savedLesson);
         } catch (InvalidLessonModelException invalidLessonModelException) {
             lessonDto.setLessonErrors(invalidLessonModelException.getLessonErrors());

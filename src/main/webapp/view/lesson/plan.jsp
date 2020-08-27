@@ -10,7 +10,7 @@
 			<h5 class="card-header">Planification séances</h5>
 			<div class="card-body">
 				<h5 class="card-title">Gérer l'emploi du temps des classes</h5>
-				<form:form modelAttribute="dummy" id="plan-lesson-form">
+				<form:form modelAttribute="lessonDto" id="plan-lesson-form">
 					<div class="form-group">
                         <label for="lClass">Classe</label>
                         <form:select id="lClass" class="form-control" path="classId">
@@ -44,6 +44,14 @@
                             <label for="lEndDate">Date de fin</label>
                             <input id="lEndDate" class="form-control" name="lEndDate" type="datetime-local" />
                         </div>
+                        <div class="form-group form-check">
+                            <input id="lIsRange" class="form-check-input" name="lIsRange" type="checkbox" />
+                            <label for="lIsRange">Définir plage ?</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="lRangeEndDate">Jusqu'au</label>
+                            <input id="lRangeEndDate" class="form-control" name="lRangeEndDate" type="date" />
+                        </div>
 					</div>
 					<input type="button" class="btn btn-primary" value="Valider" id="btn-add-lesson" />
                     <div class="form-errors mt-1"></div>
@@ -61,7 +69,7 @@
                 </button>
               </div>
               <div class="modal-body">
-              <form:form modelAttribute="dummy" id="modal-plan-lesson-form">
+              <form:form modelAttribute="lessonDto" id="modal-plan-lesson-form">
                 <div class="form-group">
                     <label for="modal-lClass">Classe</label>
                      <form:select id="modal-lClass" class="form-control" path="classId" disabled="disabled">
