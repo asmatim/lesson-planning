@@ -15,6 +15,11 @@ public class HomeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "redirect:/lesson/show";
+    }
+
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public ModelAndView error() {
         ModelAndView modelAndView = new ModelAndView();

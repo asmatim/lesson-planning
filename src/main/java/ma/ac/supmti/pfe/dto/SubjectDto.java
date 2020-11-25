@@ -1,6 +1,5 @@
 package ma.ac.supmti.pfe.dto;
 
-import javax.persistence.Column;
 
 public class SubjectDto {
 
